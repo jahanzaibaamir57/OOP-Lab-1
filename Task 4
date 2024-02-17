@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class dog {
+public:
+    string name;
+    string breed;
+    string age;
+    string color;
+
+    void bark() {
+        cout << name << " says Salamalaikhumm!" << endl;
+    }
+};
+
+class person {
+public:
+    string name;
+    int age;
+    dog pet;
+
+    person(string n, int a, string petName, string breed, string age, string color)
+        : name(n), age(a), pet({ petName, breed, age, color }) {}
+
+    void introducepet() {
+        cout << "My name is " << name << ", I am " << age << " years old." << endl;
+        cout << "My dog's Name is: " << pet.name << endl;
+        cout << "My dog's Breed is: " << pet.breed << endl;
+        cout << "My dog's Age is: " << pet.age << endl;
+        cout << "My dog's Color is: " << pet.color << endl;
+        pet.bark();
+    }
+
+    void setPet(string petName, string breed, string age, string color) {
+        pet.name = petName;
+        pet.breed = breed;
+        pet.age = age;
+        pet.color = color;
+    }
+};
+
+class house {
+private:
+    person person1;
+    person person2;
+    person person3;
+
+public:
+    house(person p1, person p2, person p3) : person1(p1), person2(p2), person3(p3) {}
+
+    void displaypersons() {
+        cout << "Family members in the house:" << endl;
+        cout << "Person 1: " << person1.name << ", age: " << person1.age << endl;
+        person1.introducepet();
+        cout << "Person 2: " << person2.name << ", age: " << person2.age << endl;
+        person2.introducepet();
+        cout << "Person 3: " << person3.name << ", age: " << person3.age << endl;
+        person3.introducepet();
+    }
+
+    void setPets(string petName1, string breed1, string age1, string color1,
+        string petName2, string breed2, string age2, string color2,
+        string petName3, string breed3, string age3, string color3) {
+        person1.setPet(petName1, breed1, age1, color1);
+        person2.setPet(petName2, breed2, age2, color2);
+        person3.setPet(petName3, breed3, age3, color3);
+    }
+};
+
+int main() {
+    person person1(" Hamza", 19, "Lebra", "Belgian Malinois", "5 years", "Brown");
+    person person2(" Ali", 20, "Max", "German Shepherd", "3 years", "Blakish brown");
+    person person3(" Umar", 18, "Spike", "Husky", "4 years", "White");
+
+    house home(person1, person2, person3);
+
+    cout << "Details of the family living in the house:" << endl;
+    home.displaypersons();
+
+    home.setPets("Spike", "Husky", "4 years", "White", "Lebra", "Belgian Malinois", "5 years", "Brown",
+        "Max", "German Shepherd", "3 years", "Blackish brown");
+
+    cout << endl;
+    cout << "After changing the pets:" << endl;
+    home.displaypersons();
+
+    return 0;
+    system("pause");
+}
